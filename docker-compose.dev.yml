@@ -1,18 +1,17 @@
-version: "3.9"
 services:
-  backend:
-    build:
-      context: ../backend_omnia
-      dockerfile: Dockerfile.dev
-    container_name: backend_omnia
-    ports:
-      - "8000:8000"
-    environment:
-      - ENVIRONMENT=development
-    volumes:
-      - ../backend_omnia:/app
-    depends_on:
-      - db
+  # backend:
+  #   build:
+  #     context: ../backend_omnia
+  #     dockerfile: Dockerfile.dev
+  #   container_name: backend_omnia
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - ENVIRONMENT=development
+  #   volumes:
+  #     - ../backend_omnia:/app
+  #   depends_on:
+  #     - db
   frontend:
     build:
       context: ../frontend_omnia
@@ -23,14 +22,14 @@ services:
     volumes:
       - ../frontend_omnia:/app
       - /app/node_modules
-  db:
-    image: postgres:alpine
-    container_name: omnia-db
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
-    volumes:
-      - ../backend_omnia/db-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    restart: always
+  # db:
+  #   image: postgres:alpine
+  #   container_name: omnia-db
+  #   environment:
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_DB: postgres
+  #   volumes:
+  #     - ../backend_omnia/db-data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: always

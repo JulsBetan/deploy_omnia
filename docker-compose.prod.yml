@@ -1,65 +1,47 @@
 version: "3.9"
 
 services:
-  api:
-    image: julbetan/api_deportes:latest
-    networks:
-      - deploy_kingtide_default
-    container_name: api_deportes
-    ports:
-      - "8000:8000"
-    environment:
-      - ENVIRONMENT=production
-    depends_on:
-      - db
-    restart: always
+  # api:
+  #   image: julbetan/api_deportes:latest
+  #   networks:
+  #     - deploy_omnia_default
+  #   container_name: api_deportes
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     - ENVIRONMENT=production
+  #   depends_on:
+  #     - db
+  #   restart: always
 
   frontend:
-    image: julbetan/frontend_kingtide:latest
+    image: julbetan/frontend_omnia:latest
     networks:
-      - deploy_kingtide_default
-    container_name: frontend_kingtide
+      - deploy_omnia_default
+    container_name: frontend_omnia
     ports:
-      - "8080:80"
+      - "8090:80"
     restart: always
 
-  db:
-    image: postgres:alpine
-    networks:
-      - deploy_kingtide_default
-    container_name: deportes-db
-    environment:
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
-    volumes:
-      - /root/projects/king_tide/db-data:/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
-    restart: always
-
-  clima:
-    image: julbetan/api_clima:latest
-    networks:
-      - deploy_kingtide_default
-    container_name: api_clima
-    ports:
-      - "3000:3000"
-    restart: always
-  
-  scheduler:
-    image: julbetan/update_events_scheduler:latest
-    networks:
-      - deploy_kingtide_default
-    container_name: update_events_scheduler
-    environment:
-      - PYTHONUNBUFFERED=1
-    restart: always
+  # db:
+  #   image: postgres:alpine
+  #   networks:
+  #     - deploy_omnia_default
+  #   container_name: deportes-db
+  #   environment:
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_DB: postgres
+  #   volumes:
+  #     - /root/projects/king_tide/db-data:/var/lib/postgresql/data
+  #   ports:
+  #     - "5432:5432"
+  #   restart: always
 
 networks:
-  deploy_kingtide_default:
-    name: deploy_kingtide_default
+  deploy_omnia_default:
+    name: deploy_omnia_default
     driver: bridge
     ipam:
       config:
-        - subnet: 172.21.0.0/16
-          gateway: 172.21.0.1
+        - subnet: 172.22.0.0/16
+          gateway: 172.22.0.1
